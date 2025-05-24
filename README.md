@@ -2,6 +2,9 @@
 
 Run ANY CrewAI crew in Docker! No setup headaches, no virtual environment drama. Just pure AI magic in a box! ✨
 
+> **⚠️ IMPORTANT**: Any changes to your crew code require rebuilding the Docker container!  
+> Quick rebuild: `docker compose down && docker compose up -d --build`
+
 ## 🎯 What This Does
 
 - 🐳 Runs your CrewAI crew in Docker with uv
@@ -44,6 +47,11 @@ docker compose up -d --build
 ```
 
 Container is now running and ready! 🎊
+
+**🔄 Remember**: After ANY code changes, you MUST rebuild with:
+```bash
+docker compose down && docker compose up -d --build
+```
 
 ## 🎮 Running Your Crew
 
@@ -112,31 +120,34 @@ output/
 
 Perfect for comparing different runs and tracking progress! 🎯
 
-## 🔄 Code Changes & Rebuilding
+## 🔄 Code Changes & Rebuilding - READ THIS!
 
-**⚠️ Important**: When you make changes to your crew code, the container needs to be **manually rebuilt**. This is intentional to avoid interrupting running agents.
+**🚨 CRITICAL**: Unlike regular development, Docker containers do NOT automatically pick up code changes. You MUST manually rebuild after every change to your crew code!
 
-### **When to Rebuild:**
+### **When You MUST Rebuild:**
 - ✅ Modified any Python files in `crew/src/`
 - ✅ Changed `crew/pyproject.toml` dependencies
 - ✅ Updated configuration files (agents.yaml, tasks.yaml)
 - ✅ Added/changed API keys in `.env`
+- ✅ **ANY change to files in the `crew/` directory**
 
 ### **How to Rebuild:**
 ```bash
-# Stop the current container
-docker compose down
-
-# Rebuild and start with latest changes
-docker compose up -d --build
-```
-
-### **Quick Rebuild (one command):**
-```bash
+# Quick rebuild (one command) - RECOMMENDED
 docker compose down && docker compose up -d --build
+
+# Or step by step:
+docker compose down              # Stop container
+docker compose up -d --build    # Rebuild and start
 ```
 
-**💡 Pro Tip**: Only rebuild when your agents aren't running to avoid interruption!
+### **Signs You Need to Rebuild:**
+- 🚨 Your code changes aren't working
+- 🚨 New dependencies aren't found
+- 🚨 Environment variables aren't updating
+- 🚨 Config changes aren't taking effect
+
+**💡 Pro Tip**: Always rebuild when your agents aren't running to avoid interruption!
 
 ## 🛠️ Other Useful Commands
 
@@ -201,13 +212,12 @@ your-project/
 
 ## 🌟 Pro Tips
 
-- 💡 Change code in `crew/src/` and it updates automatically!
+- 🔄 **Code changes require rebuild**: Always run `docker compose down && docker compose up -d --build` after modifying code
 - 📊 Outputs automatically save to `output/` folder with timestamps
 - 🔍 Use `docker compose logs -f crew` to watch what's happening
 - 🎮 Container stays running - you control when crew executes
 - 📝 Each run creates a new file - compare results over time!
 - 🗑️ Use the clear command to clean up old outputs
-- 🔄 Always rebuild after code changes for them to take effect
 - 🔍 Enable AgentOps for amazing observability insights!
 - 🧹 Run `docker system prune` occasionally to clean up
 
