@@ -1,0 +1,47 @@
+# Exclude virtual environments
+.venv/
+crew/.venv/
+
+# Git and IDE files
+.git/
+.gitignore
+.vscode/
+.idea/
+.DS_Store
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+
+# Logs and temp files
+*.log
+*.tmp
+.pytest_cache/
+
+# Documentation
+README.md
+docs/
+*.md
+
+# Docker files
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Output files
+crew/report.md
+output/
+
+# Test files
+tests/
+*_test.py
+
+# Keep what we need
+!crew/requirements.txt
+!crew/pyproject.toml
+!crew/src/
+!crew/knowledge/ 

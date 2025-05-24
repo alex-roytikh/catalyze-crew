@@ -1,0 +1,17 @@
+[project]
+name = "concierge-crewai"
+version = "0.1.0"
+description = "A dockerized CrewAI application for AI-powered concierge services"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "docker-compose",
+]
+
+[tool.docker]
+# Docker configuration for the project
+base-image = "python:3.12-slim"
+platform = ["linux/amd64", "linux/arm64"]
