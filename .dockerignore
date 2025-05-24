@@ -44,4 +44,83 @@ tests/
 !crew/requirements.txt
 !crew/pyproject.toml
 !crew/src/
-!crew/knowledge/ 
+!crew/knowledge/
+
+# Git and version control
+.git/
+.gitignore
+
+# Build artifacts and output
+output/
+dist/
+build/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Development and IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs (exclude specific log files)
+logs/
+crew/agentops.log
+crew/report.md
+
+# Environment and secrets
+.env
+.env.*
+!crew/.env
+
+# Documentation and README files (keep main README)
+README-ECR.md
+docs/
+*.md
+!README.md
+!crew/README.md
+
+# Test files
+tests/
+pytest.ini
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Docker related files
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Scripts for building (not needed in container)
+scripts/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+.temp/
+
+# Local development virtual environment
+crew/.venv/
+.local/
+
+# ECR configuration
+ecr-info.json
+
+# Backup files
+*.bak
+
+# Keep essential crew files - DO NOT EXCLUDE THESE
+# crew/pyproject.toml  # NEEDED for uv sync
+# crew/uv.lock        # NEEDED for uv sync
+# crew/src/           # NEEDED for application code
+# crew/knowledge/     # NEEDED for application data 
