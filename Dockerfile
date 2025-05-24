@@ -20,6 +20,7 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONPATH=/app/src
 ENV APP_VERSION="${VERSION}"
+ENV UV_CACHE_DIR=/app/.uv-cache
 
 # Install system dependencies and uv
 RUN apt-get update && apt-get install -y \
@@ -29,7 +30,7 @@ RUN apt-get update && apt-get install -y \
     && pip install --no-cache-dir uv
 
 # Create non-root user for security
-RUN groupadd -r appuser && useradd -r -g appuser appuser
+RUN groupadd -r appuser && useradd -r -g appuser -m appuser
 
 # Set working directory
 WORKDIR /app
@@ -40,8 +41,8 @@ COPY crew/ ./
 # Install Python dependencies using uv sync
 RUN uv sync --frozen --no-dev
 
-# Create output directory and set permissions
-RUN mkdir -p /app/output && chown -R appuser:appuser /app
+# Create output directory, cache directory and set permissions
+RUN mkdir -p /app/output /app/.uv-cache && chown -R appuser:appuser /app
 
 # Switch to non-root user
 USER appuser
